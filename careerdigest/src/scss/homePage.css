@@ -1,0 +1,232 @@
+.profileContainer{
+    /* padding: 0% 0% 0% 5%; */
+    background: radial-gradient(#525252, #131313);
+    height: 100vh;
+    position: relative;
+}
+
+.profileInfo{
+    background: radial-gradient(#525252, #131313);
+    color: cyan;
+    height: 100vh;
+    z-index: 0;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+/* below code aligns data to centre of screen supports all screen sizes*/
+.identityInfo{
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+
+    transition: all 0.5s ease;
+}
+
+/* Display picture in circle : START*/
+.profileDP{
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.dPImage{
+    width: auto;
+    height: 100%;
+    margin-left: -65px;
+}
+/* Display picture in circle : END*/
+
+.fullname{
+    font-size: 164%;
+}
+
+.scroll{
+    position: fixed;
+    bottom: 5%;
+    color: white;
+    transition: all 0.5s ease;
+}
+
+/* Header Content : Start*/
+.header{
+    position: fixed;
+    top: 1%;
+    height: 15vh;
+    width: 100%;
+    padding-left: 2%;
+    color: cyan;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.headerInfo{
+    top: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+/* Display picture in circle : START*/
+.headerDP{
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 2%;
+}
+
+.headerImage{
+    width: auto;
+    height: 100%;
+    margin-left: -25px;
+}
+
+.headerName{
+    font-size: 100%;
+}
+/* Header Content : End*/
+
+.footer{
+    width: 100%;
+    height: 6vh;
+    /* right: 5%; */
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    /* float: right; */
+    font-size: 100%;
+    bottom: 1%;
+    position: fixed;
+}
+
+.footer a{
+    text-decoration: underline;
+    color: floralwhite;
+    display: block;
+}
+
+.fadeOut{
+    opacity: 0.01;
+}
+
+.fadeIn{
+    opacity: 1 !important;
+}
+
+.overview li{
+    list-style: circle;
+    padding-bottom: 8vh;
+    /* line-height: 10vh; */
+
+    animation: fadeInAnimation ease 4s; 
+    animation-iteration-count: 1; 
+    animation-fill-mode: forwards; 
+}
+
+.overview{
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    /* line-height: 10vh; */
+
+    
+}
+
+@keyframes fadeInAnimation { 
+    0% { 
+        opacity: 0; 
+    } 
+    100% { 
+        opacity: 1; 
+    } 
+} 
+
+.overview p{
+    padding-top: 1%;
+    margin-top: 0%;
+}
+
+.detailedInfo{
+    background: radial-gradient(#525252, #131313);
+    height: 100vh;
+}
+
+@media screen and (max-width : 1200px){
+    .profileDP{
+        display: inline-block;
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+    .dPImage{
+        width: auto;
+        height: 100%;
+        margin-left: -50px;
+    }
+
+    .footer{
+        width: 100%;
+        height: 6vh;
+        /* right: 5%; */
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+        /* float: right; */
+        font-size: 80%;
+        bottom: 1%;
+        position: fixed;
+    }
+
+    .fullname{
+        font-size: 100%;
+    }
+
+    .headerDP{
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        overflow: hidden;
+        border-radius: 50%;
+        margin-right: 2%;
+    }
+    
+    .headerImage{
+        width: auto;
+        height: 100%;
+        margin-left: -20px;
+    }
+
+    .headerName{
+        font-size: 80%;
+    }
+
+    .overview li{
+        list-style: circle;
+        padding-bottom: 3vh;
+        /* line-height: 10vh; */
+    
+        animation: fadeInAnimation ease 4s; 
+        animation-iteration-count: 1; 
+        animation-fill-mode: forwards; 
+    }
+    
+    .overview{
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+        /* line-height: 10vh; */
+    
+    }
+}
