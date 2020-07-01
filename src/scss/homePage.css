@@ -164,6 +164,17 @@
 }
 
 /* The actual timeline (the vertical ruler) */
+@keyframes timelineFadein { 
+    0% { 
+        transform: translateX(-50%);
+        opacity: 0;
+    } 
+    100% { 
+        transform: translateX(0%);
+        opacity: 1; 
+    } 
+} 
+
 .timeline {
     position: fixed;
     top : 15vh;
@@ -171,6 +182,7 @@
     transform: translateX(-100%);
     opacity: 0;
 }
+ 
 .timelineActive{
     animation: timelineFadein ease 2s; 
     animation-iteration-count: 1; 
@@ -191,16 +203,33 @@
     cursor: pointer;
 }
 
-@keyframes timelineFadein { 
-    0% { 
-        transform: translateX(-50%);
-        opacity: 0;
-    } 
-    100% { 
-        transform: translateX(0%);
-        opacity: 1; 
-    } 
-} 
+.detailsPanel{
+    position: absolute;
+    top : 17vh;
+    left: 15vw;
+    height: 70vh;
+    width: 80vw;
+    border-color: rgb(68, 151, 199);
+    border-style: groove;
+    padding: 1vw 0.5vw 0.5vw 0.5vw;
+    /* z-index: 1; */
+    background: rgba(180, 172, 172, 0.25);
+}
+
+.closeDetais{
+    float: right;
+    top: 0;
+    /* color: ; */
+    border-color: white;
+    background-color: white;
+    display: none;
+}
+
+.firstlogo{
+    height: 5vw;
+    width: 5vw;
+    /* padding: 0.5vw 0 0 1vw; */
+}
 
 @media screen and (max-width : 1200px){
     .profileDP{
@@ -269,5 +298,25 @@
         align-items: center;
         /* line-height: 10vh; */
     
+    }
+
+    .timelineClicked{
+        display: none;
+    }
+
+    .detailsPanel{
+        display: none;
+    }
+
+    .closeDetais{
+        /* cursor: pointer; */
+        display: inline;
+    }
+
+    .detailsPanelClicked{
+        display: inline;
+        animation: fadeInAnimation ease 4s; 
+        animation-iteration-count: 1; 
+        animation-fill-mode: forwards; 
     }
 }

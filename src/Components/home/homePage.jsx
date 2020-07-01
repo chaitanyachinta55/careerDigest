@@ -6,6 +6,7 @@ class homePage extends Component{
         this.state = {
             hideDetailedScroll : false
         }
+        this.timelineClicked = this.timelineClicked.bind(this);
     }
 
     componentDidMount(){
@@ -37,6 +38,11 @@ class homePage extends Component{
                 this.setState({hideDetailedScroll : false});
             }
         })
+    }
+
+    timelineClicked(){
+        document.getElementById("timeline").classList.toggle("timelineClicked");
+        document.getElementById("detailsPanel").classList.toggle("detailsPanelClicked");
     }
 
     render(){
@@ -76,13 +82,22 @@ class homePage extends Component{
             <div className="detailedInfo">
                 <div id = "timeline" className="timeline">
                     <ul>
-                        <li>2019</li>
-                        <li>2018</li>
-                        <li>2017</li>
-                        <li>2014</li>
+                        <li>Jun 2019...</li>
+                        <li>Mar 2018 - Jun 2019</li>
+                        <li>Feb 2017 - Mar 2018</li>
+                        <li onClick = {() => this.timelineClicked()} >Jan 2014 - Jan 2017</li>
                     </ul>
                 </div>
-                <div className="detailsPanel"></div>
+                <div id = "detailsPanel" className="detailsPanel">
+                    <div className="firstcomp">
+                        <div>
+                        <img src="/images/cts_logo.png" alt="" className="firstlogo"/>
+                        <div className="closeDetais" onClick = {() => this.timelineClicked()}>X</div>
+                        </div>
+                        <p>Skills Acquired:</p>
+                        Mainframes , JCL , Cobol , Java , Spring , Hibernate
+                    </div>
+                </div>
             </div>
             
             <div className="footer">
