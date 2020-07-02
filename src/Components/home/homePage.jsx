@@ -4,7 +4,19 @@ class homePage extends Component{
     constructor(props){
         super(props);
         this.state = {
-            hideDetailedScroll : false
+            hideDetailedScroll : false,
+            clickedLevel : "Jan 2014 - Jan 2017",
+            experienceData : {
+                "Jan 2014 - Jan 2017" : {"Company": "Cognizant" , "Logo" : "cts_logo.png" , "Skills Acquired" : "Mainframes , JCL , Cobol , Java , Spring , Hibernate" ,
+                    "Projects" : [{"Title" : "Walmart Finance Sne" , "Duration" : "Jan 2014 - Apr 2015" , "Role" : "Mainframes Developer" , "Programming Languages" : "COBOL , JCL" , "Team Size" : 20 },
+                    {"Title" : "3M Visitor Management" , "Duration" : "Apr 2015 - Jan 2017" , "Role" : "Java Developer" , "Programming Languages" : "Java, spring, Hibernate, WebServices(RestFull), SQL, Stored Procedure" , "Team Size" : "09" }
+                    ]},
+                "Feb 2017 - Mar 2018" : {"Company": "Cognizant" , "Logo" : "cts_logo.png" , "Skills Acquired" : "Mainframes , JCL , Cobol , Java , Spring , Hibernate" ,
+                    "Projects" : [{"Title" : "Walmart Finance Sne" , "Duration" : "Jan 2014 - Apr 2015" , "Role" : "Mainframes Developer" , "Programming Languages" : "COBOL , JCL" , "Team Size" : 20 },
+                    {"Title" : "3M Visitor Management" , "Duration" : "Apr 2015 - Jan 2017" , "Role" : "Java Developer" , "Programming Languages" : "Java, spring, Hibernate, WebServices(RestFull), SQL, Stored Procedure" , "Team Size" : "09" }
+                    ]}
+            }
+            
         }
         this.timelineClicked = this.timelineClicked.bind(this);
     }
@@ -40,7 +52,8 @@ class homePage extends Component{
         })
     }
 
-    timelineClicked(){
+    timelineClicked(eachLevel){
+        this.setState({clickedLevel : eachLevel});
         document.getElementById("timeline").classList.toggle("timelineClicked");
         document.getElementById("detailsPanel").classList.toggle("detailsPanelClicked");
     }
@@ -82,20 +95,38 @@ class homePage extends Component{
             <div className="detailedInfo">
                 <div id = "timeline" className="timeline">
                     <ul>
-                        <li>Jun 2019...</li>
+                        {
+                            Object.keys(this.state.experienceData).map(eachLevel => (
+                                <li onClick = {() => this.timelineClicked(eachLevel)} >{eachLevel}</li>
+                            ))
+                        }
+                        {/* <li>Jun 2019...</li>
                         <li>Mar 2018 - Jun 2019</li>
                         <li>Feb 2017 - Mar 2018</li>
-                        <li onClick = {() => this.timelineClicked()} >Jan 2014 - Jan 2017</li>
+                        <li onClick = {() => this.timelineClicked()} >Jan 2014 - Jan 2017</li> */}
                     </ul>
                 </div>
                 <div id = "detailsPanel" className="detailsPanel">
                     <div className="firstcomp">
                         <div>
-                        <img src="/images/cts_logo.png" alt="" className="firstlogo"/>
-                        <div className="closeDetais" onClick = {() => this.timelineClicked()}>X</div>
+                            <img src = {"/images/"+this.state.experienceData[this.state.clickedLevel].Logo} alt="" className="firstlogo"></img>
+                            <div className="closeDetais" onClick = {() => this.timelineClicked()}>X</div>
                         </div>
-                        <p>Skills Acquired:</p>
-                        Mainframes , JCL , Cobol , Java , Spring , Hibernate
+                        {/* <div className="skillAcquired">Skill Acquired : Mainframes , JCL , Cobol , Java , Spring , Hibernate</div> */}
+                        {Object.keys(this.state.experienceData[this.state.clickedLevel]).map(eachData => (
+                            "Projects" !== eachData && "Logo" !== eachData && "Company" !== eachData ?
+                            <p>{eachData} : {this.state.experienceData[this.state.clickedLevel][eachData]}</p>
+                            :
+                            "Projects" === eachData ?
+                            
+                            <p>{eachData} : {this.state.experienceData[this.state.clickedLevel][eachData].map(eachProject => (
+                                Object.keys(eachProject).map( each => (
+                                    <p>{each} : {eachProject[each]}</p>
+                                ))
+                            ))}</p>
+                            :
+                            <></>
+                        ))}
                     </div>
                 </div>
             </div>
