@@ -7,13 +7,22 @@ class homePage extends Component{
             hideDetailedScroll : false,
             clickedLevel : "Jan 2014 - Jan 2017",
             experienceData : {
-                "Jan 2014 - Jan 2017" : {"Company": "Cognizant" , "Logo" : "cts_logo.png" , "Skills Acquired" : "Mainframes , JCL , Cobol , Java , Spring , Hibernate" ,
+                "Jan 2014 - Jan 2017" : {"Company": "Cognizant" , "Logo" : "cts_logo.png" , "Skills Acquired" : "Mainframes , JCL , Cobol , Java , Spring , Hibernate , SQL" ,
                     "Projects" : [{"Title" : "Walmart Finance Sne" , "Duration" : "Jan 2014 - Apr 2015" , "Role" : "Mainframes Developer" , "Programming Languages" : "COBOL , JCL" , "Team Size" : 20 },
                     {"Title" : "3M Visitor Management" , "Duration" : "Apr 2015 - Jan 2017" , "Role" : "Java Developer" , "Programming Languages" : "Java, spring, Hibernate, WebServices(RestFull), SQL, Stored Procedure" , "Team Size" : "09" }
                     ]},
-                "Feb 2017 - Mar 2018" : {"Company": "Cognizant" , "Logo" : "cts_logo.png" , "Skills Acquired" : "Mainframes , JCL , Cobol , Java , Spring , Hibernate" ,
-                    "Projects" : [{"Title" : "Walmart Finance Sne" , "Duration" : "Jan 2014 - Apr 2015" , "Role" : "Mainframes Developer" , "Programming Languages" : "COBOL , JCL" , "Team Size" : 20 },
-                    {"Title" : "3M Visitor Management" , "Duration" : "Apr 2015 - Jan 2017" , "Role" : "Java Developer" , "Programming Languages" : "Java, spring, Hibernate, WebServices(RestFull), SQL, Stored Procedure" , "Team Size" : "09" }
+                "Feb 2017 - Mar 2018" : {"Company": "Ernst & Young" , "Logo" : "ey_logo.png" , "Skills Acquired" : "Smart Communications , Guide Wire , JAVA , Angular 2 , Hibernate , SQL" ,
+                    "Projects" : [{"Title" : "SFRE" , "Duration" : "Feb 2017 - Mar 2018" , "Role" : "Smart Communications Developer" , "Programming Languages" : "Smart Communications , Java Script , Guide Wire" , "Team Size" : 5 },
+                    {"Title" : "Estimation Manager" , "Duration" : "May 2017 - Mar 2018" , "Role" : "Full Stack Developer" , "Programming Languages" : "Angular 2 , Java , SQL , Hibernate" , "Team Size" : "09" }
+                    ]},
+                "Mar 2018 - Jun 2019" : {"Company": "Value Momentum" , "Logo" : "vam_logo.jpg" , "Skills Acquired" : "Smart Communications , Guide Wire " ,
+                    "Projects" : [{"Title" : "Forms new Development" , "Duration" : "Mar 2018 - Jun 2019" , "Role" : "Smart Communications Developer" , "Programming Languages" : "Smart Communications , Java Script , Guide Wire" , "Team Size" : 10 }
+                    ]},
+                "Jun 2019..." : {"Company": "Hitachi Vantara" , "Logo" : "hitachi_logo.png" , "Skills Acquired" : "ReactJS , NodeJS , PostgreSQL ,  Spring Boot , SQL , Stored Proceedures , Apache SuperSet , Azure Functions , Azure Logic Apps" ,
+                    "Projects" : [{"Title" : "Kubota Farm Machinery" , "Duration" : "Jun 2019 - Mar 2020" , "Role" : "Full Stack Developer" , "Programming Languages" : "ReactJS , NodeJS , Azure Functions , Azure Logic Apps , PostgreSQL" , "Team Size" : 6 },
+                    {"Title" : "HCVS Fleet Management" , "Duration" : "Mar 2020 - June 2020" , "Role" : "Full Stack Developer" , "Programming Languages" : "Spring Boot , SQL , Stored Proceedures" , "Team Size" : 5 },
+                    {"Title" : "Apache Superset Training" , "Duration" : "June 2020 - July 2020" , "Role" : "UI Engineer" , "Programming Languages" : "Apache Superset , ReactJS , CSS" , "Team Size" : 5 }
+
                     ]}
             }
             
@@ -40,7 +49,7 @@ class homePage extends Component{
                 this.setState({hideDetailedScroll : true});
             }
 
-            if(this.state.hideDetailedScroll && window.scrollY === 0){
+            if(this.state.hideDetailedScroll && window.scrollY <= 25 && window.scrollY > 0){
                 console.log(window.scrollY);
                 document.getElementById("scroll").classList.toggle("fadeOut");
                 document.getElementById("identityInfo").classList.toggle("fadeOut");
@@ -54,6 +63,11 @@ class homePage extends Component{
 
     timelineClicked(eachLevel){
         this.setState({clickedLevel : eachLevel});
+        document.getElementById("timeline").classList.toggle("timelineClicked");
+        document.getElementById("detailsPanel").classList.toggle("detailsPanelClicked");
+    }
+
+    detailedClosed(){
         document.getElementById("timeline").classList.toggle("timelineClicked");
         document.getElementById("detailsPanel").classList.toggle("detailsPanelClicked");
     }
@@ -110,23 +124,28 @@ class homePage extends Component{
                     <div className="firstcomp">
                         <div>
                             <img src = {"/images/"+this.state.experienceData[this.state.clickedLevel].Logo} alt="" className="firstlogo"></img>
-                            <div className="closeDetais" onClick = {() => this.timelineClicked()}>X</div>
+                            <div className="closeDetais" onClick = {() => this.detailedClosed()}>X</div>
                         </div>
                         {/* <div className="skillAcquired">Skill Acquired : Mainframes , JCL , Cobol , Java , Spring , Hibernate</div> */}
+                        <div>
                         {Object.keys(this.state.experienceData[this.state.clickedLevel]).map(eachData => (
                             "Projects" !== eachData && "Logo" !== eachData && "Company" !== eachData ?
-                            <p>{eachData} : {this.state.experienceData[this.state.clickedLevel][eachData]}</p>
+                            <><text className = "boldText">{eachData}</text> : {this.state.experienceData[this.state.clickedLevel][eachData]}</>
                             :
                             "Projects" === eachData ?
-                            
-                            <p>{eachData} : {this.state.experienceData[this.state.clickedLevel][eachData].map(eachProject => (
-                                Object.keys(eachProject).map( each => (
-                                    <p>{each} : {eachProject[each]}</p>
-                                ))
-                            ))}</p>
+                            <div className="projectDetails">
+                                <text className = "boldText">{eachData}</text> : {this.state.experienceData[this.state.clickedLevel][eachData].map((eachProject , index) => (
+                                <>
+                                <p><text className = "boldText">{index+1}</text></p>
+                                {Object.keys(eachProject).map( each => (
+                                    <p><text className = "boldText">{each}</text> : {eachProject[each]}</p>
+                                ))}
+                                </>
+                            ))}</div>
                             :
                             <></>
                         ))}
+                        </div>
                     </div>
                 </div>
             </div>
