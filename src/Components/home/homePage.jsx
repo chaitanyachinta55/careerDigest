@@ -5,6 +5,7 @@ class homePage extends Component{
         super(props);
         this.state = {
             hideDetailedScroll : false,
+            hidesiteinfo : false,
             clickedLevel : "Jan 2014 - Jan 2017",
             experienceData : {
                 "Jan 2014 - Jan 2017" : {"Company": "Cognizant" , "Logo" : "cts_logo.png" , "Skills Acquired" : "Mainframes , JCL , Cobol , Java , Spring , Hibernate , SQL" ,
@@ -37,8 +38,11 @@ class homePage extends Component{
                 document.getElementById("scroll").classList.toggle("fadeOut");
                 document.getElementById("identityInfo").classList.toggle("fadeOut");
                 document.getElementById("overview").classList.toggle("fadeOut");
-                document.getElementById("header").classList.toggle("fadeIn");
+                document.getElementById("headerInfo").classList.toggle("fadeIn");
                 document.getElementById("timeline").classList.toggle("timelineActive");
+                
+                if(!this.state.hidesiteinfo && window.scrollY < 300)
+                document.getElementById("siteinfo").classList.toggle("fadeIn");
                 
                 //BELOW CODE SHOULD HELP IN ANIMATING ONE AFTER THE OTHER
                 const eachline = document.querySelectorAll('.timeline li');
@@ -46,7 +50,13 @@ class homePage extends Component{
                 eachline.forEach((li , index) => {
                     li.style.animation = `timelineFadein 2s ease forwards ${index / 9}s`
                 });
-                this.setState({hideDetailedScroll : true});
+                this.setState({hideDetailedScroll : true , hidesiteinfo : true});
+            }
+
+            if(this.state.hidesiteinfo && (window.scrollY >= 300 || window.scrollY === 0)){
+
+                document.getElementById("siteinfo").classList.toggle("fadeIn");
+                this.setState({hidesiteinfo : false});
             }
 
             if(this.state.hideDetailedScroll && window.scrollY <= 25 && window.scrollY >= 0){
@@ -54,7 +64,7 @@ class homePage extends Component{
                 document.getElementById("scroll").classList.toggle("fadeOut");
                 document.getElementById("identityInfo").classList.toggle("fadeOut");
                 document.getElementById("overview").classList.toggle("fadeOut");
-                document.getElementById("header").classList.toggle("fadeIn");
+                document.getElementById("headerInfo").classList.toggle("fadeIn");
                 document.getElementById("timeline").classList.toggle("timelineActive");
                 this.setState({hideDetailedScroll : false});
             }
@@ -75,14 +85,12 @@ class homePage extends Component{
     render(){
         return <div className="profileContainer">
             <div id = "header" className="header">
-                <section>
                     < div id = "headerInfo" className="headerInfo">
                         <div className="headerDP">
                             <img className="headerImage" src = "/images/profilepic.jpg" alt=""/>
                         </div>
-                        <h1 className="headerName">Chaitanya Chinta</h1>
+                        <h1 className="headerName">Chaitanya Chinta (Exp : 6.5 Years)</h1>
                     </div>
-                </section>
             </div>
             <div className="profileInfo">
                 <section>
@@ -95,7 +103,12 @@ class homePage extends Component{
                 </section>
                 
                 <h4 id = "scroll" className="scroll">Scroll for Detailed Info</h4>
-
+                <div id = "siteinfo" className="siteinfo">
+                    <h4>Site Info :</h4>
+                    <p><text className = "boldText">Purpose :</text>  Personal Interest</p>
+                    <p><text className = "boldText">Teck Stack :</text>  ReactJS , CSS , GITHUB</p>
+                    <p><text className = "boldText">Hosted On :</text>  Heroku</p>
+                </div>
                 <div id = "overview" className="overview">
                     <ul>
                         <li>6.5 Years Experience</li>
@@ -114,10 +127,6 @@ class homePage extends Component{
                                 <li onClick = {() => this.timelineClicked(eachLevel)} >{eachLevel}</li>
                             ))
                         }
-                        {/* <li>Jun 2019...</li>
-                        <li>Mar 2018 - Jun 2019</li>
-                        <li>Feb 2017 - Mar 2018</li>
-                        <li onClick = {() => this.timelineClicked()} >Jan 2014 - Jan 2017</li> */}
                     </ul>
                 </div>
                 <div id = "detailsPanel" className="detailsPanel">
@@ -126,7 +135,6 @@ class homePage extends Component{
                             <img src = {"/images/"+this.state.experienceData[this.state.clickedLevel].Logo} alt="" className="firstlogo"></img>
                             <div className="closeDetais" onClick = {() => this.detailedClosed()}>X</div>
                         </div>
-                        {/* <div className="skillAcquired">Skill Acquired : Mainframes , JCL , Cobol , Java , Spring , Hibernate</div> */}
                         <div>
                         {Object.keys(this.state.experienceData[this.state.clickedLevel]).map(eachData => (
                             "Projects" !== eachData && "Logo" !== eachData && "Company" !== eachData ?
