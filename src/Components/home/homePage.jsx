@@ -49,7 +49,7 @@ class homePage extends Component{
                 this.setState({hideDetailedScroll : true});
             }
 
-            if(this.state.hideDetailedScroll && window.scrollY <= 25 && window.scrollY > 0){
+            if(this.state.hideDetailedScroll && window.scrollY <= 25 && window.scrollY >= 0){
                 console.log(window.scrollY);
                 document.getElementById("scroll").classList.toggle("fadeOut");
                 document.getElementById("identityInfo").classList.toggle("fadeOut");
