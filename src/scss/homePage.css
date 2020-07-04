@@ -219,6 +219,11 @@
     cursor: pointer;
 }
 
+.clickedLevel {
+    border-color: rgb(68, 151, 199);
+    border-style: groove;
+}
+
 .detailsPanel{
     position: absolute;
     top : 17vh;
@@ -330,8 +335,19 @@
     
     }
 
+    .timeline li{
+        color: cornsilk;
+        cursor: pointer;
+        border-color: rgba(0, 255, 255, 0.829);
+    }
+
     .timelineClicked{
         display: none;
+    }
+
+    .clickedLevel {
+        border-color: none;
+        /* border-style: none; */
     }
 
     .detailsPanel{
