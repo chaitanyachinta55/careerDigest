@@ -124,7 +124,7 @@ class homePage extends Component{
                     <ul>
                         {
                             Object.keys(this.state.experienceData).map(eachLevel => (
-                                <li onClick = {() => this.timelineClicked(eachLevel)} >{eachLevel}</li>
+                                <button className = {this.state.clickedLevel === eachLevel ? "clickedLevel" : ""} onClick = {() => this.timelineClicked(eachLevel)} >{eachLevel}</button>
                             ))
                         }
                     </ul>
