@@ -1,9 +1,12 @@
 import React , {Component} from 'react';
+import moment from 'moment';
+
 import '../../scss/homePage.css';
 class homePage extends Component{
     constructor(props){
         super(props);
         this.state = {
+            totalExperience : moment.duration(moment().diff(moment("20140103", "YYYYMMDD"))).asYears().toFixed(1),
             hideDetailedScroll : false,
             hidesiteinfo : false,
             clickedLevel : "Jan 2014 - Jan 2017",
@@ -20,7 +23,7 @@ class homePage extends Component{
                     "Projects" : [{"Title" : "Forms new Development" , "Duration" : "Mar 2018 - Jun 2019" , "Role" : "Smart Communications Developer" , "Programming Languages" : "Smart Communications , Java Script , Guide Wire" , "Team Size" : 10 }
                     ]},
                 "Jun 2019..." : {"Company": "Hitachi Vantara" , "Logo" : "hitachi_logo.png" , "Skills Acquired" : "ReactJS , NodeJS , PostgreSQL ,  Spring Boot , SQL , Stored Proceedures , Apache SuperSet , Azure Functions , Azure Logic Apps" ,
-                    "Projects" : [{"Title" : "Kubota Farm Machinery" , "Duration" : "Jun 2019 - Mar 2020" , "Role" : "Full Stack Developer" , "Programming Languages" : "ReactJS , NodeJS , Azure Functions , Azure Logic Apps , PostgreSQL" , "Team Size" : 6 },
+                    "Projects" : [{"Title" : "Kubota Farm Machinery" , "Duration" : "Jun 2019 - Mar 2020" , "Role" : "Full Stack Developer" , "Programming Languages" : "ReactJS , NodeJS , Azure Functions , Azure Logic Apps , Azure Data Factory , Azure API Management, PostgreSQL" , "Team Size" : 6 },
                     {"Title" : "HCVS Fleet Management" , "Duration" : "Mar 2020 - June 2020" , "Role" : "Full Stack Developer" , "Programming Languages" : "Spring Boot , SQL , Stored Proceedures" , "Team Size" : 5 },
                     {"Title" : "Apache Superset Training" , "Duration" : "June 2020 - July 2020" , "Role" : "UI Engineer" , "Programming Languages" : "Apache Superset , ReactJS , CSS" , "Team Size" : 5 }
 
@@ -89,7 +92,7 @@ class homePage extends Component{
                         <div className="headerDP">
                             <img className="headerImage" src = "/images/profilepic.jpg" alt=""/>
                         </div>
-                        <h1 className="headerName">Chaitanya Chinta (Exp : 6.5 Years)</h1>
+                        <h1 className="headerName">Chaitanya Chinta (Exp : {this.state.totalExperience} Years)</h1>
                     </div>
             </div>
             <div className="profileInfo">
@@ -111,11 +114,12 @@ class homePage extends Component{
                 </div>
                 <div id = "overview" className="overview">
                     <ul>
-                        <li>6.5 Years Experience</li>
+                        <li>{this.state.totalExperience} Years Experience</li>
                         <li>Current Organization : Hitachi Consulting</li>
                         <li>Current Designation : Sr Software Engineer</li>
                         <li>Skill Set : <p> JAVA , SPRING , HIBERNATE , SQL , STORED PROCEEDURES , <br/> 
-                            REACTJS , NODEJS , EXPRESS , ANGULARJS , SMART COMMUNICATIONS</p></li>
+                            REACTJS , NODEJS , EXPRESS , ANGULARJS , SMART COMMUNICATIONS , <br/>
+                            Azure Cloud Development (App Services, API Management , Data Factory , Azure Storage Services )</p></li>
                     </ul>
                 </div>
             </div>
